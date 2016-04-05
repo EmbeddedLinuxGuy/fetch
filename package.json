@@ -1,0 +1,17 @@
+{
+  "name": "fetch",
+  "version": "1.0.0",
+  "description": "Demo fetch URL and save to file",
+  "main": "fetch",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "./fetch http://www.linuxautomat.com outfile.html && diff -u outfile.html expected.html"
+  },
+  "keywords": [
+    "demo"
+  ],
+  "author": "",
+  "license": "ISC"
+}

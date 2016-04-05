@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var http = require("http");
+
+var NUM_ARGS = 2;
+
+//console.log(process.argv);
+var arglen = process.argv.length;
+
+if (arglen != NUM_ARGS + 2) {
+    console.log("Usage: " + process.argv[1] + " URL filename");
+    process.exit(1);
+}
+var url = process.argv[2];
+var filename = process.argv[3];
+
+fs.open(filename, "w", (err, fd) => {
+    if (err) {
+	console.log("Could not write " + filename + ": " + err);
+	process.exit(1);
+    }
+    console.log("Fetching " + url + "...");
+    http.get(url, (resp) => {
+	console.log(filename);
+	if (resp && resp.statusCode == 200) {
+	    resp.on("data", (chunk) => {
+		fs.write(fd, chunk);
+	    });
+	    resp.on("end", () => {
+		fs.close(fd);
+	    });
+	}
+    });
+});
+
