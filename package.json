@@ -1,17 +1,21 @@
 {
-  "name": "fetch",
-  "version": "1.0.0",
-  "description": "Demo fetch URL and save to file",
-  "main": "fetch",
-  "dependencies": {
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "./fetch http://www.linuxautomat.com outfile.html && diff -u outfile.html expected.html"
-  },
-  "keywords": [
-    "demo"
-  ],
-  "author": "",
-  "license": "ISC"
+    "name": "fetch",
+    "version": "1.0.0",
+    "description": "Demo fetch URL and save to file",
+    "repository": {
+	"type": "git",
+	"url": "https://github.com/embeddedlinuxguy/fetch.git"
+    },
+    "main": "fetch",
+    "dependencies": {
+    },
+    "devDependencies": {},
+    "scripts": {
+	"test": "./fetch http://www.linuxautomat.com outfile.html && diff -u outfile.html expected.html && echo OK"
+    },
+    "keywords": [
+	"demo"
+    ],
+    "author": "",
+    "license": "ISC"
 }
