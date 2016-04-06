@@ -1,14 +1,10 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
+var fs = require("fs");
 var http = require("http");
 
 var NUM_ARGS = 2;
-
-//console.log(process.argv);
-var arglen = process.argv.length;
-
-if (arglen != NUM_ARGS + 2) {
+if (process.argv.length != NUM_ARGS + 2) {
     console.log("Usage: " + process.argv[1] + " URL filename");
     process.exit(1);
 }
@@ -22,15 +18,17 @@ fs.open(filename, "w", (err, fd) => {
     }
     console.log("Fetching " + url + "...");
     http.get(url, (resp) => {
-	console.log(filename);
+	console.log("Saving " + filename);
 	if (resp && resp.statusCode == 200) {
 	    resp.on("data", (chunk) => {
-		fs.write(fd, chunk);
+		fs.write(fd, chunk, 0, chunk.length);
 	    });
 	    resp.on("end", () => {
 		fs.close(fd);
 	    });
+	} else {
+	    console.log("Failed to fetch " + url);
+	    process.exit(1);
 	}
     });
 });
-
